@@ -2,11 +2,16 @@ from azure.cognitiveservices.vision.computervision import ComputerVisionClient
 from msrest.authentication import CognitiveServicesCredentials
 from azure.cognitiveservices.vision.computervision.models import OperationStatusCodes
 import time
+import yaml
 
-endpoint = "https://lab1-inst1.cognitiveservices.azure.com/"
-key = "DPO0OCaAKOK4Xud8ZIXoElTov9IjXLh7P1M6bD8xQg8uL8AhHzQZJQQJ99BAACYeBjFXJ3w3AAAFACOGznOQ"
+# Load config
+with open('config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
 
-credentials = CognitiveServicesCredentials(key)
+endpoint = config['endpoint']
+key = config['key']
+
+credentials = CognitiveServicesCredentials(config['key'])
 
 client = ComputerVisionClient(
     endpoint=endpoint,
